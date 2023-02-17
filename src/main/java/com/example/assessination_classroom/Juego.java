@@ -6,6 +6,7 @@ import com.example.assessination_classroom.clases.Proyectil;
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.scene.media.AudioClip;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -13,10 +14,11 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
-
-
-
 import java.util.HashMap;
+
+
+//Con la ayuda del canal de YouTube @ErickVladimirReyesMarin he aprendido ha realizar este videojuego.
+
 
 public class Juego extends Application {
     private GraphicsContext graficos;
@@ -32,10 +34,9 @@ public class Juego extends Application {
     public static HashMap<String, Image> imagenes;
     private Enemigo  enemigo1;
     private Proyectil proyectil1;
-    public static boolean defeat;
+    public static boolean defeat, victoria;
     private int tiempo = 1;
-
-
+    AudioClip music;
 
 
     public static void main(String[] args) {
@@ -60,15 +61,16 @@ public class Juego extends Application {
             public void handle(long tiempoActual) {
                 tiempo++;
 
-                if(!defeat){
+                if(!defeat && !victoria){
                     actualizarEstado();
                     pintar();
                 } else {
                     graficos.drawImage(imagenes.get("game-over"),0,0);
-
+                    music.stop();
                 }
                 System.out.println(tiempo);
-                if (tiempo>1854 && defeat==false) {
+                if (tiempo>1854 && !defeat) {
+                    victoria = true;
                     System.out.println("Has ganado!");
                     graficos.drawImage(imagenes.get("victoria"),0,0);
                 }
@@ -90,16 +92,17 @@ public class Juego extends Application {
     public void inicializarComponentes(){
         imagenes = new HashMap<String, Image>();
         cargarImagenes();
-        jugador = new Jugador(600,510,3,"koro",5);
+        jugador = new Jugador(600,510,1,"koro",5);
         root = new Group();
         escena = new Scene(root, 1500, 750);
         lienzo = new Canvas(1500, 750);
         root.getChildren().add(lienzo);
         graficos = lienzo.getGraphicsContext2D();
-        enemigo1 = new Enemigo(455,250,"nagisa",7, jugador);
-        proyectil1 = new Proyectil(480,290,"cuchillo",770, enemigo1);
-        AudioClip buzzer = new AudioClip(getClass().getResource("/audio/buzzer.mp3").toExternalForm());
-        buzzer.play();
+        enemigo1 = new Enemigo(455,250,"nagisa",5, jugador);
+        proyectil1 = new Proyectil(480,290,"cuchillo",770, enemigo1,jugador);
+        music = new AudioClip(getClass().getResource("tension_music.mp3").toExternalForm());
+        music.play();
+
 
     }
 

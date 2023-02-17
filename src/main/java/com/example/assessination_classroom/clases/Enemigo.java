@@ -58,14 +58,14 @@ public class Enemigo {
     }
 
     public void mover() {
-        if (this.x > jugador.getX()){
-            velocidad=-4;
-        }
         if (this.x == jugador.getX()){
             velocidad=0;
         }
+        if (this.x > jugador.getX()){
+            velocidad=-5;
+        }
         if (this.x < jugador.getX()){
-            velocidad=4;
+            velocidad=5;
         }
         x+=velocidad;
     }

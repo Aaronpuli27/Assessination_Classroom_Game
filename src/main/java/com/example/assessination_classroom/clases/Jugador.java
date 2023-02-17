@@ -2,16 +2,16 @@ package com.example.assessination_classroom.clases;
 
 import com.example.assessination_classroom.Juego;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 import javafx.scene.shape.Rectangle;
 
 public class Jugador{
-
     private int x;
     private int y;
     private int vida;
     private String nombreImagen;
     private int velocidad;
+
 
     public Jugador(int x, int y, int vida, String nombreImagen, int velocidad) {
         this.x = x;
@@ -68,15 +68,11 @@ public class Jugador{
 
     //Se ejecuta por cada iteracion por ciclo de juego
     public void mover(){
-        if (x>1360)
-            x=-100;
-        if (x<-101)
-            x=1360;
 
-        if (Juego.derecha)//Mover a la derecha
+        if (Juego.derecha && x<1410)//Mover a la derecha
             x+=velocidad;
 
-        if (Juego.izquierda)//Mover a la izquierda
+        if (Juego.izquierda && x>-0)//Mover a la izquierda
             x-=velocidad;
 
         if (Juego.arriba && y>=370)//Mover a la arriba

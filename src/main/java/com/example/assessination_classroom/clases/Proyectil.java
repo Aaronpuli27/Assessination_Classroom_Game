@@ -10,13 +10,15 @@ public class Proyectil {
     private String nombreImagen;
     private int limite;
     private Enemigo enemigo;
+    private Jugador jugador;
 
-    public Proyectil(int x, int y, String nombreImagen, int limite, Enemigo enemigo) {
+    public Proyectil(int x, int y, String nombreImagen, int limite, Enemigo enemigo, Jugador jugador) {
         this.x = x;
         this.y = y;
         this.nombreImagen = nombreImagen;
         this.limite = limite;
         this.enemigo = enemigo;
+        this.jugador = jugador;
     }
 
     public int getX() {
@@ -58,7 +60,8 @@ public class Proyectil {
                 x= this.enemigo.getX()+10;
             }
         }
-        y +=7;
+
+        y +=12;
     }
 
     public static Rectangle obtenerRectangle(GraphicsContext graficos){
