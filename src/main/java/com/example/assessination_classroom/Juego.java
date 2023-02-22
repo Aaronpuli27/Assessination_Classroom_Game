@@ -98,7 +98,7 @@ public class Juego extends Application {
         lienzo = new Canvas(1500, 750);
         root.getChildren().add(lienzo);
         graficos = lienzo.getGraphicsContext2D();
-        enemigo1 = new Enemigo(455,250,"nagisa",5, jugador);
+        enemigo1 = new Enemigo(255,250,"nagisa",5, jugador);
         proyectil1 = new Proyectil(480,290,"cuchillo",770, enemigo1,jugador);
         music = new AudioClip(getClass().getResource("tension_music.mp3").toExternalForm());
         music.play();
@@ -169,7 +169,7 @@ public class Juego extends Application {
                         abajo = false;
                         break;
                     case "SPACE":
-                        jugador.setVelocidad(8);
+                        jugador.setVelocidad(5);
                         jugador.setNombreImagen("koro");
                         break;
                 }
